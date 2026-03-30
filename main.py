@@ -8,7 +8,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 def get_random_pokemon():
-    id_pokemon = random.randint(1, 151)
+    id_pokemon = random.randint(1, 1025)
     url = f"https://pokeapi.co/api/v2/pokemon/{id_pokemon}"
     dados = requests.get(url).json()
     
