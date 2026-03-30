@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Poke-Jo-Ken-Po</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background: #2c3e50; color: #333; }
+        .card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            display: inline-block; 
+            margin-top: 50px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 5px solid #ef5350;
+        }
+        img { width: 180px; image-rendering: pixelated; } /* Deixa o pokemon nítido */
+        select, button { 
+            padding: 10px 15px; 
+            font-size: 16px; 
+            border-radius: 8px; 
+            border: 2px solid #ddd;
+            margin: 5px;
+        }
+        button { 
+            cursor: pointer; 
+            background: #ef5350; 
+            color: white; 
+            border: none; 
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover { transform: scale(1.1); background: #d32f2f; }
+        .resultado-box { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background: #f9f9f9; 
+            border-radius: 10px; 
+            border-left: 5px solid #ef5350;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Pokémon vs Humano</h1>
+        <img src="{{ pokemon.imagem }}" alt="pokemon">
+        <h3>Um <strong>{{ pokemon.nome }}</strong> selvagem apareceu!</h3>
+
+        <form action="/jogar" method="post">
+            <input type="hidden" name="poke_nome" value="{{ pokemon.nome }}">
+            <input type="hidden" name="poke_img" value="{{ pokemon.imagem }}">
+            
+            <select name="player_choice">
+                <option value="Pedra">🪨 Pedra</option>
+                <option value="Papel">📄 Papel</option>
+                <option value="Tesoura">✂️ Tesoura</option>
+            </select>
+            <button type="submit">LUTAR!</button>
+        </form>
+
+        {% if resultado %}
+            <div class="resultado-box">
+                <p>Você: <b>{{ escolha_player }}</b> | {{ pokemon.nome }}: <b>{{ cpu_choice }}</b></p>
+                <h2 style="color: #d32f2f;">{{ resultado }}</h2>
+                <br>
+                <a href="/"><button style="background: #4caf50;">Próxima Batalha</button></a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
